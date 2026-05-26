@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSO-Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+
+    <style>
+        #map {
+            position: absolute;
+            top: 60px;
+            bottom: 60px;
+            left: 10px;
+            right: 10px;
+            width: calc(100% - 20px);
+            height: calc(100vh - 130px);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: #f8f8f8;
+            z-index: 0;
+        }
+
+        #header-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            color: black;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+
+        #bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            color: black;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+            border-top: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+
+
+
+        #fullscreen-image {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+        }
+
+        #fullscreen-image img {
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+        }
+
+        .popup-image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+
+        }
+
+        .popup-image-grid img {
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+            border: 1px solid black;
+            padding: 2px;
+        }
+
+
+        #oscillation-counter {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .logo-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: nowrap;
+            padding-right: 20px;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
+
+        #info-button {
+
+            position: fixed;
+            top: 10px;
+            right: 15px;
+            background: #3399ff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease-in-out;
+        }
+
+        #info-button:hover {
+            background: #66b3ff;
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1200;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            width: 60%;
+            max-width: 700px;
+            text-align: justify;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: red;
+        }
+
+        #excel-button {
+            position: fixed;
+            top: 10px;
+            right: 110px;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease-in-out;
+        }
+
+        #excel-button:hover {
+            background: #5cb85c;
+        }
+
+        #info-button,
+        #excel-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+        }
+
+        .side-panel {
+            position: fixed;
+            top: 67px;
+            right: -300px;
+            width: 350px;
+            height: 79%;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1200;
+            overflow-y: auto;
+            padding: 20px;
+            margin-right: 10px;
+            display: none;
+        }
+
+        .side-panel.open {
+            right: 5px;
+            display: block;
+        }
+
+        .side-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        .side-panel-header h2 {
+            margin: 0;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .side-panel-body {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .side-panel-body p {
+            margin: 0 0 10px;
+        }
+
+
+
+
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div id="header-bar">
+        <div id="header-title">Power System Oscillations Map</div>
+        <div id="header-buttons">
+            <button id="excel-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    style="vertical-align: middle; margin-right: 5px;" viewBox="0 0 16 16">
+                    <path
+                        d="M5.884 6.68a.5.5 0 0 1 .524-.466h1.175a.5.5 0 0 1 .491.41l.662 3.32a.5.5 0 0 1-.491.59H6.4a.5.5 0 0 1-.491-.41L5.246 7.69a.5.5 0 0 1 .638-.59z" />
+                    <path
+                        d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM13.5 4.5H10a.5.5 0 0 1-.5-.5V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
+                </svg>
+                Download data sheet
+            </button>
+            <button id="info-button">ℹ️ Info</button>
+        </div>
+    </div>
+
+    <!-- source of imgaes: https://www.flaticon.com/search?word=energy-->
+
+    <div id="info-popup" class="popup-overlay">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>About This Map</h2>
+            <p>
+                This map visualizes oscillation events in electrical grids. Each marker represents an observed event and
+                displays details such as location, frequency, duration, and affected devices.
+            </p>
+            <p>
+                The marker colors reflect the recency of the event based on the <strong>last observation</strong> date.
+                A smooth color gradient is generated using chroma.js:
+            </p>
+            <ul>
+                <li><strong>Blue hues</strong> (e.g., <span style="color:#1DABE6;">&#9679;</span> and <span
+                        style="color:#1C366A;">&#9679;</span>) indicate older events.</li>
+                <li><strong>Red hues</strong> (e.g., <span style="color:#E43034;">&#9679;</span>, <span
+                        style="color:#FC4E51;">&#9679;</span>, and <span style="color:#AF060F;">&#9679;</span>) denote
+                    more recent events.</li>
+                <li>Intermediate colors represent events with dates between the oldest and the most recent.</li>
+            </ul>
+            <p>
+                Click on a marker to view detailed information about the oscillation, including potential causes,
+                mitigation measures, and other technical details. The map is fully interactive, allowing you to zoom in
+                and out and explore data from different regions.
+            </p>
+            <p>
+                For more information contact with: miguel.carreno[at]upc.edu or alexandre.gracia[at]upc.edu
+            </p>
+        </div>
+    </div>
+
+    <div id="bottom-bar">
+        <div id="oscillation-counter">Oscillations: 0</div>
+        <div class="logo-container">
+            <img src="images/LogoCitceaUPC.png" alt="Logo 1">
+            <img src="images/upc-positiu-p3005.png" alt="Logo 2">
+        </div>
+    </div>
+
+    <div id="map"></div>
+    <div id="fullscreen-image" onclick="closeFullscreenImage()">
+        <img id="fullscreen-img" src="" alt="Zoomed Image">
+    </div>
+
+
+    <script>
+        function openSidePanel(content) {
+            document.getElementById("side-panel-content").innerHTML = content;
+            const sidePanel = document.getElementById("side-panel");
+            sidePanel.style.display = "block";
+            sidePanel.classList.add("open");
+
+        }
+
+        function closeSidePanel() {
+            const panel = document.getElementById("side-panel");
+            panel.classList.remove("open");
+            panel.style.display = "none";
+        }
+
+
+        let debug = false;
+        let map = L.map('map', {
+            center: [20, 0],
+            zoom: 2.5,
+            minZoom: 2,
+
+        });
+        let activeLayers = {};
+        let activeCircle = null;
+        let activeLabels = [];
+        let oscillationData = [];
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            noWrap: true,
+            bounds: L.latLngBounds(L.latLng(-85, -180), L.latLng(85, 180)),
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        document.getElementById("info-button").addEventListener("click", function () {
+            document.getElementById("info-popup").style.display = "flex";
+        });
+
+        document.getElementById("info-popup").addEventListener("click", function (event) {
+            if (event.target === this) {
+                closePopup();
+            }
+        });
+
+        function closePopup() {
+            document.getElementById("info-popup").style.display = "none";
+        }
+
+        document.getElementById("excel-button").addEventListener("click", function () {
+            downloadExcel();
+        })
+
+        function closePopup() {
+            document.getElementById("info-popup").style.display = "none";
+        }
+
+        fetch('oscillation_data.json')
+            .then(response => response.json())
+            .then(data => {
+                oscillationData = data;
+                let dates = data.map(entry => new Date(entry.last_observation));
+                let minDate = new Date(Math.min(...dates));
+                let maxDate = new Date(Math.max(...dates));
+
+                function parseDate(dateString) {
+                    if (dateString.indexOf('T') === -1) {
+                        return new Date(dateString.replace(/-/g, '/'));
+                    }
+                    return new Date(dateString);
+                }
+                function getColor(dateStr) {
+                    let date = new Date(dateStr);
+                    let fraction = (date - minDate) / (maxDate - minDate);
+                    let r = fraction * 255;
+                    let b = (1 - fraction) * 255;
+                    return `rgb(${Math.round(r)}, 0, ${Math.round(b)})`;
+                }
+                updateOscillationCounter(data.length);
+
+                data.forEach(entry => {
+
+                    if (debug) console.log(entry);
+                    let coords = entry.coordinates.split(',').map(Number);
+
+                    let imageHTML = "";
+                    if (Array.isArray(entry.images) && entry.images.length > 0) {
+                        imageHTML = '<div class="popup-image-grid">';
+                        entry.images.forEach(img => {
+                            imageHTML += `<img src="${img}" onclick="openFullscreenImage('${img}')" alt="">`;
+                        });
+                        imageHTML += '</div>';
+                    }
+                    let sidePanelContent = `<b>Grid:</b> ${entry.grid}<br>
+                          <b>ID:</b> ${entry.id}<br>
+                          <b>Country:</b> ${entry.country}<br>
+                          <b>Region/State:</b> ${entry.Region_state}<br>
+                          <b>First Observation:</b> ${entry.first_observation}<br>
+                          <b>Last Observation:</b> ${entry.last_observation}<br>
+                          <b>Duration:</b> ${entry.duration}<br>
+                          <b>Frequency:</b> ${entry.frequency} Hz<br>
+                          <b>Involved Devices:</b> ${entry.involved_devices}<br>
+                          <b>Propagation:</b> ${entry.propagation}<br>
+                          <b>Distance:</b> ${entry.distance} km<br>
+                          <b>Outages:</b> ${entry.outages}<br>
+                          <b>Identification:</b> ${entry.identification}<br>
+                          <b>Analysis:</b> ${entry.method}<br>
+                          <b>Purported Issue:</b> ${entry.purported}<br>
+                          <b>Mitigation Measures:</b> ${entry.mitigation_measures}<br>
+                          <b>Possible Mechanism:</b> ${entry.possible_mechanism}<br>
+                        ${imageHTML}`;
+                    if (Array.isArray(entry.links) && entry.links.length > 0) {
+                        sidePanelContent += `<b>More info:</b> <br>`;
+                        entry.links.forEach((link) => {
+                            let displayText = link.length > 47 ? link.substring(0, 46) + '...' : link;
+                            sidePanelContent += `<a href="${link}" target="_blank">${displayText}</a> <br>`;
+                        });
+
+
+                        sidePanelContent += `<br>`;
+                    }
+
+
+
+                    let markerColor = getColor(entry.last_observation);
+
+                    let myIcon = L.divIcon({
+                        className: "",
+                        html: `<div style="width:25px; height:41px;">
+                               <svg viewBox="0 0 25 41" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; display:block;">
+                                 <path fill="${markerColor}" d="M12.5,0C5.596,0,0,5.596,0,12.5c0,9.176,12.5,28.5,12.5,28.5S25,21.676,25,12.5C25,5.596,19.404,0,12.5,0z"/>
+                                 <circle cx="12.5" cy="12.5" r="5" fill="#fff"/>
+                               </svg>
+                         </div>`,
+                        iconSize: [25, 41],
+                        iconAnchor: [12.5, 41]
+                    });
+
+                    let marker = L.marker(coords, { icon: myIcon })
+                        .addTo(map);
+                    let radius = parseFloat(entry.radius) * 1000 || 50000;
+                    marker.on('click', function () {
+                        clearMap();
+                        let aux_coords = [coords[0], coords[1] + 1];
+                        openSidePanel(sidePanelContent);
+                        map.setView(aux_coords, 8);
+                        activeCircle = L.circle(coords, {
+                            color: 'red',
+                            fillColor: '#f1d0d0',
+                            fillOpacity: 0.3,
+                            radius: radius
+                        }).addTo(map);
+                        activeLayers[entry.id] = [activeCircle];
+
+                        let pointMarkers = {};
+                        pointMarkers[entry.id] = L.marker(coords, { icon: myIcon })
+                            .addTo(map);
+                        activeLayers[entry.id].push(pointMarkers[entry.id]);
+
+
+
+
+                        if (Array.isArray(entry.points) && entry.points.length > 0) {
+                            entry.points.forEach(point => {
+                                let pointCoords = point.coordinates.split(',').map(Number);
+                                let subMarker;
+                                if (point.icon_type === 'substation') {
+                                    subMarker = L.circleMarker(pointCoords, {
+                                        color: point.guilty ? 'red' : 'gray',
+                                        fillColor: point.guilty ? 'red' : 'gray',
+                                        fillOpacity: 0.9,
+                                        radius: 6
+                                    }).addTo(map).bindPopup(`<b>${point.name}</b>`);
+                                } else {
+
+                                    let selectedIcon;
+                                    switch (point.icon_type) {
+
+                                        case 'solar':
+                                            selectedIcon = L.icon({
+                                                iconUrl: 'static/icons/solar_energy.png',
+                                                iconSize: [25, 41],
+                                                iconAnchor: [12.5, 41],
+                                                popupAnchor: [0, -41]
+                                            });
+                                            break;
+                                        case 'wind':
+                                            selectedIcon = L.icon({
+                                                iconUrl: 'static/icons/wind-farm.png',
+                                                iconSize: [25, 41],
+                                                iconAnchor: [12.5, 41],
+                                                popupAnchor: [0, -41]
+                                            });
+                                            break;
+                                        case 'nuclear':
+                                            selectedIcon = L.icon({
+                                                iconUrl: 'static/icons/nuclear-plant.png',
+                                                iconSize: [25, 41],
+                                                iconAnchor: [12.5, 41],
+                                                popupAnchor: [0, -41]
+                                            });
+                                            break;
+                                        default:
+                                            selectedIcon = iconStation;
+                                    }
+                                    subMarker = L.marker(pointCoords, { icon: selectedIcon }).addTo(map).bindPopup(`<b>${point.name}</b>`);
+
+                                }
+
+
+                                activeLayers[entry.id].push(subMarker);
+                                pointMarkers[point.name] = subMarker;
+
+                                let label = L.marker(pointCoords, {
+                                    icon: L.divIcon({
+                                        className: 'label',
+                                        html: `<b style="color: ${point.guilty ? 'red' : 'black'};">${point.name}</b>`,
+                                        iconSize: [80, 20]
+                                    })
+                                }).addTo(map);
+
+                                activeLabels.push(label);
+                            });
+
+                            if (Array.isArray(entry.connections) && entry.connections.length > 0) {
+                                entry.connections.forEach(connection => {
+                                    let pointA = connection.from;
+                                    let pointB = connection.to;
+                                    let color = connection.color || 'black';
+
+                                    if (pointMarkers[pointA] && pointMarkers[pointB]) {
+                                        let latlngA = pointMarkers[pointA].getLatLng();
+                                        let latlngB = pointMarkers[pointB].getLatLng();
+
+                                        let connLine = L.polyline([latlngA, latlngB], { color: color, weight: 2 }).addTo(map);
+                                        activeLayers[entry.id].push(connLine);
+                                    }
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+        function updateOscillationCounter(count) {
+            document.getElementById('oscillation-counter').innerText = `Oscillations: ${count}`;
+        }
+        function clearMap() {
+            Object.values(activeLayers).forEach(layers => {
+                layers.forEach(layer => map.removeLayer(layer));
+            });
+            activeLayers = {};
+            activeLabels.forEach(label => map.removeLayer(label));
+            activeLabels = [];
+            if (activeCircle) {
+                map.removeLayer(activeCircle);
+                activeCircle = null;
+            }
+        }
+
+        function openFullscreenImage(imageUrl) {
+            document.getElementById('fullscreen-img').src = imageUrl;
+            document.getElementById('fullscreen-image').style.display = 'flex';
+        }
+
+        function closeFullscreenImage() {
+            document.getElementById('fullscreen-image').style.display = 'none';
+        }
+
+        function downloadExcel() {
+            if (!oscillationData || oscillationData.length === 0) return;
+
+            const columns = [
+                'id', 'country', 'Region_state', 'last_observation', 'europe', 'repetitive',
+                'trigger', 'duration', 'frequency', 'involved_devices', 'propagation',
+                'distance', 'radius', 'outages', 'identification', 'method', 'purported',
+                'mitigation_measures', 'possible_mechanism', 'first_observation', 'grid'
+            ];
+
+            const wsData = [columns.map(c => c.charAt(0).toUpperCase() + c.slice(1))];
+
+            oscillationData.forEach(entry => {
+                const row = columns.map(col => {
+                    let val = entry[col];
+                    if (typeof val === 'boolean') return val ? 'Yes' : 'No';
+                    if (val === undefined || val === null) return '';
+                    return String(val);
+                });
+                wsData.push(row);
+            });
+
+            const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+            const colWidths = columns.map(col => {
+                const headerLen = col.length + 6;
+                const maxContentLen = oscillationData.reduce((max, entry) => {
+                    const val = entry[col];
+                    return Math.max(max, val ? String(val).length + 1 : 0);
+                }, 0);
+                return { wch: Math.max(headerLen, maxContentLen) };
+            });
+            ws['!cols'] = colWidths;
+
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Oscillations');
+
+            const now = new Date();
+            const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '');
+            const filename = `oscillations_${dateStr}.xlsx`;
+
+            XLSX.writeFile(wb, filename);
+        }
+
+        map.on('click', function () {
+            clearMap();
+            closeSidePanel();
+        });
+    </script>
+    <div id="side-panel" class="side-panel">
+        <div class="side-panel-header">
+            <h2>Oscillation Details</h2>
+            <span class="close-btn" onclick="closeSidePanel()">×</span>
+        </div>
+        <div class="side-panel-body" id="side-panel-content">
+        </div>
+
+    </div>
+</body>
+
+</html>

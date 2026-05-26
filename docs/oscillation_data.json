@@ -1,0 +1,1769 @@
+[
+  {
+    "id": 1,
+    "country": "India",
+    "Region_state": "Rajasthan",
+    "europe": false,
+    "repetitive": true,
+    "last_observation": "2023/07",
+    "trigger": "Not identified",
+    "duration": "Hours",
+    "frequency": "3",
+    "involved_devices": "Photovoltaic Plant",
+    "propagation": "Cointained in Rajasthan ISTS Complex",
+    "distance": "400",
+    "radius": 400,
+    "outages": "No",
+    "identification": "PMU Data",
+    "method": "Transient simulation with EMT models",
+    "purported": "Slow polling rates and incorrect tuning of outer-loop PI compensators",
+    "mitigation_measures": "returning",
+    "possible_mechanism": "Outer Loop - V Control",
+    "images": [
+      "images/Rajasthan.png",
+      "images/Linear_rajasthan.png"
+    ],
+    "links": [
+      "https://www.e-cigre.org/publications/detail/c4-11521-2024-strategies-for-mitigation-of-oscillations-in-ibr-penetrated-network-in-india.html"
+    ],
+    "coordinates": "26.852356, 71.509525",
+    "first_observation": "2023/01",
+    "grid": "India, Rajasthan",
+    "points": [
+      {
+        "name": "Fatehgarh I",
+        "coordinates": "26.8523556, 71.5095250",
+        "icon_type": "solar",
+        "guilty": true
+      },
+      {
+        "name": "Fatehgarh II",
+        "coordinates": "26.703776, 71.272221",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Bhadla",
+        "coordinates": "27.419444, 72.072222",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Bhadla-II",
+        "coordinates": "27.516083, 72.479278",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Bikaner",
+        "coordinates": "28.249167, 73.381944",
+        "icon_type": "substation",
+        "guilty": false
+      }
+    ],
+    "connections": [
+      {
+        "from": "Fatehgarh I",
+        "to": "Fatehgarh II",
+        "color": "gray"
+      },
+      {
+        "from": "Fatehgarh II",
+        "to": "Bhadla",
+        "color": "gray"
+      },
+      {
+        "from": "Fatehgarh II",
+        "to": "Bhadla-II",
+        "color": "gray"
+      },
+      {
+        "from": "Bhadla",
+        "to": "Bhadla-II",
+        "color": "gray"
+      },
+      {
+        "from": "Bhadla",
+        "to": "Bikaner",
+        "color": "gray"
+      },
+      {
+        "from": "Bhadla-II",
+        "to": "Bikaner",
+        "color": "gray"
+      },
+      {
+        "from": "Fatehgarh I",
+        "to": "1",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "country": "India",
+    "Region_state": "Rajasthan",
+    "europe": false,
+    "repetitive": true,
+    "last_observation": "2023/01",
+    "trigger": "Not identified",
+    "duration": "3 minutes",
+    "frequency": "0.08",
+    "involved_devices": "Photovoltaic Plant",
+    "propagation": "Cointained in Rajasthan ISTS Complex",
+    "distance": "400",
+    "radius": 400,
+    "outages": "No",
+    "identification": "PMU Data",
+    "method": "Transient simulation with EMT models",
+    "purported": "Too strict parameterization of ride-through configuration",
+    "mitigation_measures": "returning",
+    "possible_mechanism": "LVRT Cycle",
+    "images": [
+      "images/2nd_India.jpg",
+      "images/Linear_rajasthan.png"
+    ],
+    "links": [
+      "https://www.e-cigre.org/publications/detail/c4-11521-2024-strategies-for-mitigation-of-oscillations-in-ibr-penetrated-network-in-india.html"
+    ],
+    "coordinates": "26.952356, 71.409525",
+    "first_observation": "2023/01",
+    "grid": "India, Rajasthan",
+    "points": [
+      {
+        "name": "Fatehgarh I",
+        "coordinates": "26.8523556, 71.5095250",
+        "icon_type": "solar",
+        "guilty": true
+      },
+      {
+        "name": "Fatehgarh II",
+        "coordinates": "26.703776, 71.272221",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Bhadla",
+        "coordinates": "27.419444, 72.072222",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Bhadla-II",
+        "coordinates": "27.516083, 72.479278",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Bikaner",
+        "coordinates": "28.249167, 73.381944",
+        "icon_type": "substation",
+        "guilty": false
+      }
+    ],
+    "connections": [
+      {
+        "from": "Fatehgarh I",
+        "to": "Fatehgarh II",
+        "color": "gray"
+      },
+      {
+        "from": "Fatehgarh II",
+        "to": "Bhadla",
+        "color": "gray"
+      },
+      {
+        "from": "Fatehgarh II",
+        "to": "Bhadla-II",
+        "color": "gray"
+      },
+      {
+        "from": "Bhadla",
+        "to": "Bhadla-II",
+        "color": "gray"
+      },
+      {
+        "from": "Bhadla",
+        "to": "Bikaner",
+        "color": "gray"
+      },
+      {
+        "from": "Bhadla-II",
+        "to": "Bikaner",
+        "color": "gray"
+      },
+      {
+        "from": "Fatehgarh I",
+        "to": "2",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "country": "Australia",
+    "Region_state": "West Murray Zone",
+    "europe": false,
+    "repetitive": true,
+    "last_observation": "2021/12",
+    "trigger": "Not identified",
+    "duration": "45 minutes",
+    "frequency": "17",
+    "involved_devices": "Photovoltaic Plant",
+    "propagation": "Contained in around 5 substations",
+    "distance": "333",
+    "radius": 333,
+    "outages": "No",
+    "identification": "PMU Data",
+    "method": "Transient simulation with EMT models, Nyquist criterion",
+    "purported": "Deficit of energy in the DC Link",
+    "mitigation_measures": "~",
+    "possible_mechanism": "DC and AC sides energy unbalance",
+    "images": [
+      "images/WMZ.jpg",
+      "images/Australia2020jpg.jpg"
+    ],
+    "links": [
+      "https://aemo.com.au/-/media/files/electricity/nem/network_connections/west-murray/high-level-summary-of-wmz-subsynchronous-oscillations.pdf?la=en",
+      "https://ieeexplore-ieee-org.recursos.biblioteca.upc.edu/document/10430466"
+    ],
+    "coordinates": "-34.817792, 142.665360",
+    "first_observation": "2020/08",
+    "grid": "Australia, West Murray Zone",
+    "points": [
+      {
+        "name": "Red Cliffs Substation",
+        "coordinates": "-34.3070, 142.1819",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Wemen Solar Farm",
+        "coordinates": "-34.5080, 143.0490",
+        "icon_type": "solar",
+        "guilty": false
+      },
+      {
+        "name": "Kiamal Solar Farm",
+        "coordinates": "-35.0000, 142.8500",
+        "icon_type": "solar",
+        "guilty": false
+      },
+      {
+        "name": "Broken Hill Solar Plant",
+        "coordinates": "-31.9952, 141.4510",
+        "icon_type": "solar",
+        "guilty": false
+      },
+      {
+        "name": "Murray River Solar Farm",
+        "coordinates": "-35.7000, 144.2000",
+        "icon_type": "solar",
+        "guilty": false
+      }
+    ],
+    "connections": [
+      {
+        "from": "Red Cliffs Substation",
+        "to": "Wemen Solar Farm",
+        "color": "gray"
+      },
+      {
+        "from": "Wemen Solar Farm",
+        "to": "Kiamal Solar Farm",
+        "color": "gray"
+      },
+      {
+        "from": "Kiamal Solar Farm",
+        "to": "Murray River Solar Farm",
+        "color": "gray"
+      },
+      {
+        "from": "Murray River Solar Farm",
+        "to": "Broken Hill Solar Plant",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "country": "USA",
+    "Region_state": "Texas",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2021/05",
+    "trigger": "Single-line-to-ground fault",
+    "duration": "10 minutes",
+    "frequency": "1",
+    "involved_devices": "Photovoltaic plant",
+    "propagation": "Contained in Texas",
+    "distance": "322",
+    "radius": 322,
+    "outages": "Generator Trip",
+    "identification": "PMU Data",
+    "method": "Not reported",
+    "purported": "PLL Instability",
+    "mitigation_measures": "Enforce compliance with NERC requirements",
+    "possible_mechanism": "PLL Instability",
+    "images": [
+      "images/Texas-Odessa2021.jpg",
+      "images/Texas-Odessa2021-graphic.jpg"
+    ],
+    "links": [
+      "https://www.nerc.com/pa/rrm/ea/Documents/Odessa_Disturbance_Report.pdf#page=4.45"
+    ],
+    "coordinates": "31.843366, -102.296395",
+    "first_observation": "2021/05",
+    "grid": "USA, Texas",
+    "points": [
+      {
+        "name": "Phoebe forst solar",
+        "coordinates": "31.842868451942746, -102.86845548952242",
+        "icon_type": "solar",
+        "guilty": true
+      },
+      {
+        "name": "Bearkat wind",
+        "coordinates": "31.757517160666193, -101.66618626774653",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Sweetwater Wind Farm",
+        "coordinates": "31.757517160666193, -101.66618626774653",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "San Andres Substation",
+        "coordinates": "32.2164246216064, -102.49516513794097",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Cunningham Substation",
+        "coordinates": "32.724439862093895, -103.35482869986399",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Greasewood Solar Project",
+        "coordinates": "31.03805675571341, -102.48390434438065",
+        "icon_type": "solar",
+        "guilty": false
+      }
+    ],
+    "connections": [
+      {
+        "from": "Phoebe forst solar",
+        "to": "Bearkat wind",
+        "color": "gray"
+      },
+      {
+        "from": "Phoebe forst solar",
+        "to": "San Andres Substation",
+        "color": "gray"
+      },
+      {
+        "from": "Bearkat wind",
+        "to": "Sweetwater Wind Farm",
+        "color": "gray"
+      },
+      {
+        "from": "San Andres Substation",
+        "to": "Cunningham Substation",
+        "color": "gray"
+      },
+      {
+        "from": "Cunningham Substation",
+        "to": "Greasewood Solar Project",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "country": "USA",
+    "Region_state": "Texas",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2017/10",
+    "trigger": "Line-to-ground-fault",
+    "duration": "3 minutes",
+    "frequency": "20-30",
+    "involved_devices": "Wind farm - Type III",
+    "propagation": "Contained in Texas Lon hill - Edinburgh Line",
+    "distance": "112",
+    "radius": 112,
+    "outages": "Line Trip",
+    "identification": "PMU Data",
+    "method": "Not reported",
+    "purported": "DFIG vs. RLC elements",
+    "mitigation_measures": "Bypass Series Capacitors",
+    "possible_mechanism": "Induction Generator Effect",
+    "images": [
+      "images/Texas-201710-Line.png",
+      "images/Texas-201708-Oscillations.png"
+    ],
+    "links": [
+      "https://www.researchgate.net/publication/378306573_Introduction_to_Power_System_Oscillatory_Stability"
+    ],
+    "coordinates": "27.842723, -97.614613",
+    "first_observation": "2017/10",
+    "grid": "USA, Texas",
+    "points": [
+      {
+        "name": "Lon Hill",
+        "coordinates": "27.842723, -97.614613",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Papalote Creek Wind Farm 1",
+        "coordinates": "28.01045476397033, -97.5283189236954",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Papalote Creek Wind Farm 2",
+        "coordinates": "27.995710721065205, -97.32458944945324",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Midway Wind",
+        "coordinates": "27.955719237103462, -97.30068590451467",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Cranell Wind Farm",
+        "coordinates": "28.210325249751698, -97.3755242213321",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Karankawa Wind",
+        "coordinates": "28.126340, -97.780692",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "El Algodon Alto Wind Farm",
+        "coordinates": "28.001709, -97.717724",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Edinburg",
+        "coordinates": "26.341427, -98.173938",
+        "icon_type": "substation",
+        "guilty": false
+      }
+    ],
+    "connections": [
+      {
+        "from": "Papalote Creek Wind Farm 2",
+        "to": "Papalote Creek Wind Farm 1",
+        "color": "gray"
+      },
+      {
+        "from": "Papalote Creek Wind Farm 1",
+        "to": "Lon Hill",
+        "color": "gray"
+      },
+      {
+        "from": "Midway Wind",
+        "to": "Papalote Creek Wind Farm 1",
+        "color": "gray"
+      },
+      {
+        "from": "Cranell Wind Farm",
+        "to": "Lon Hill",
+        "color": "gray"
+      },
+      {
+        "from": "Karankawa Wind",
+        "to": "El Algodon Alto Wind Farm",
+        "color": "gray"
+      },
+      {
+        "from": "El Algodon Alto Wind Farm",
+        "to": "Lon Hill",
+        "color": "gray"
+      },
+      {
+        "from": "Lon Hill",
+        "to": "Edinburg",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "country": "China",
+    "Region_state": "North West",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2017/10",
+    "trigger": "Not identified",
+    "duration": "1 minute",
+    "frequency": "37.5",
+    "involved_devices": "Wind farm - Type III",
+    "propagation": "Contained in NW China Jingxia area",
+    "distance": "50",
+    "radius": 50,
+    "outages": "Generator Trip",
+    "identification": "PMU Data",
+    "method": "Eigenvalue analysis",
+    "purported": "Improper configuration of control parameters with the DFIG and STATCOM",
+    "mitigation_measures": "To appropriately reduce the proportional or integral coefficients of the inner loop current control of the DFIG and STATCOM, or increasing the reactive power output of the STATCOM.",
+    "possible_mechanism": "Unknown",
+    "images": [
+      "images/Jingxia_area_China_NW_One-line.png",
+      "images/Jingxia_area_China_NW_Frequency.png",
+      "images/Jingxia_area_China_NW_ksp2.png",
+      "images/Jingxia_area_China_NW_ksi2.png",
+      "images/Jingxia_area_China_NW_ki2.png",
+      "images/Jingxia_area_China_NW_kp2.png"
+    ],
+    "links": [
+      "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8787810",
+      "https://cssc-hz.com/?en/Products/Cases/117.html"
+    ],
+    "coordinates": "41.56, 94.56",
+    "first_observation": "2017/09",
+    "grid": "China, North West",
+    "points": [],
+    "connections": []
+  },
+  {
+    "id": 7,
+    "country": "USA",
+    "Region_state": "Texas",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2017/09",
+    "trigger": "Line-to-ground-fault",
+    "duration": "0.4 seconds",
+    "frequency": "20-30",
+    "involved_devices": "Wind farm - Type III",
+    "propagation": "Contained in Texas Lon hill - Edinburgh Line",
+    "distance": "112",
+    "radius": 112,
+    "outages": "Line Trip, Generator Trip",
+    "identification": "PMU Data",
+    "method": "Not reported",
+    "purported": "DFIG vs. RLC elements",
+    "mitigation_measures": "Bypass Series Capacitors",
+    "possible_mechanism": "Induction Generator Effect",
+    "images": [
+      "images/Texas-201709-Line.png",
+      "images/Texas-201709-Oscillations.png"
+    ],
+    "links": [
+      "https://www.researchgate.net/publication/378306573_Introduction_to_Power_System_Oscillatory_Stability"
+    ],
+    "coordinates": "27.843, -97.615",
+    "first_observation": "2017/09",
+    "grid": "USA, Texas",
+    "points": [
+      {
+        "name": "Lon Hill",
+        "coordinates": "27.842723, -97.614613",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Papalote Creek Wind Farm 1",
+        "coordinates": "28.01045476397033, -97.5283189236954",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Papalote Creek Wind Farm 2",
+        "coordinates": "27.995710721065205, -97.32458944945324",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Midway Wind",
+        "coordinates": "27.955719237103462, -97.30068590451467",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Cranell Wind Farm",
+        "coordinates": "28.210325249751698, -97.3755242213321",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Karankawa Wind",
+        "coordinates": "28.126340, -97.780692",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "El Algodon Alto Wind Farm",
+        "coordinates": "28.001709, -97.717724",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Edinburg",
+        "coordinates": "26.341427, -98.173938",
+        "icon_type": "substation",
+        "guilty": false
+      }
+    ],
+    "connections": [
+      {
+        "from": "Papalote Creek Wind Farm 2",
+        "to": "Papalote Creek Wind Farm 1",
+        "color": "gray"
+      },
+      {
+        "from": "Papalote Creek Wind Farm 1",
+        "to": "Lon Hill",
+        "color": "gray"
+      },
+      {
+        "from": "Midway Wind",
+        "to": "Papalote Creek Wind Farm 1",
+        "color": "gray"
+      },
+      {
+        "from": "Cranell Wind Farm",
+        "to": "Lon Hill",
+        "color": "gray"
+      },
+      {
+        "from": "Karankawa Wind",
+        "to": "El Algodon Alto Wind Farm",
+        "color": "gray"
+      },
+      {
+        "from": "El Algodon Alto Wind Farm",
+        "to": "Lon Hill",
+        "color": "gray"
+      },
+      {
+        "from": "Lon Hill",
+        "to": "Edinburg",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "country": "USA",
+    "Region_state": "Texas",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2017/08",
+    "trigger": "Line-to-ground-fault",
+    "duration": "1 second",
+    "frequency": "20-30",
+    "involved_devices": "Wind farm - Type III",
+    "propagation": "Contained in Texas Lon hill - Edinburgh Line",
+    "distance": "112",
+    "radius": 112,
+    "outages": "Line Trip, Generator Trip",
+    "identification": "PMU Data",
+    "method": "Not reported",
+    "purported": "DFIG vs. RLC elements",
+    "mitigation_measures": "Bypass Series Capacitors",
+    "possible_mechanism": "Induction Generator Effect",
+    "images": [
+      "images/Texas-201708-Line.png",
+      "images/Texas-201708-Oscillations.png"
+    ],
+    "links": [
+      "https://www.researchgate.net/publication/378306573_Introduction_to_Power_System_Oscillatory_Stability",
+      "www.ercot.com/files/docs/2021/12/02/20_Lower_Rio_Grande_Valley_System_Enhancement_Regional_Planning_Group_Project.pdf"
+    ],
+    "coordinates": "27.841, -97.613",
+    "first_observation": "2017/08",
+    "grid": "USA, Texas",
+    "points": [
+      {
+        "name": "Lon Hill",
+        "coordinates": "27.842723, -97.614613",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Papalote Creek Wind Farm 1",
+        "coordinates": "28.01045476397033, -97.5283189236954",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Papalote Creek Wind Farm 2",
+        "coordinates": "27.995710721065205, -97.32458944945324",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Midway Wind",
+        "coordinates": "27.955719237103462, -97.30068590451467",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Cranell Wind Farm",
+        "coordinates": "28.210325249751698, -97.3755242213321",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Karankawa Wind",
+        "coordinates": "28.126340, -97.780692",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "El Algodon Alto Wind Farm",
+        "coordinates": "28.001709, -97.717724",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Edinburg",
+        "coordinates": "26.341427, -98.173938",
+        "icon_type": "substation",
+        "guilty": false
+      }
+    ],
+    "connections": [
+      {
+        "from": "Papalote Creek Wind Farm 2",
+        "to": "Papalote Creek Wind Farm 1",
+        "color": "gray"
+      },
+      {
+        "from": "Papalote Creek Wind Farm 1",
+        "to": "Lon Hill",
+        "color": "gray"
+      },
+      {
+        "from": "Midway Wind",
+        "to": "Papalote Creek Wind Farm 1",
+        "color": "gray"
+      },
+      {
+        "from": "Cranell Wind Farm",
+        "to": "Lon Hill",
+        "color": "gray"
+      },
+      {
+        "from": "Karankawa Wind",
+        "to": "El Algodon Alto Wind Farm",
+        "color": "gray"
+      },
+      {
+        "from": "El Algodon Alto Wind Farm",
+        "to": "Lon Hill",
+        "color": "gray"
+      },
+      {
+        "from": "Lon Hill",
+        "to": "Edinburg",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "country": "Australia",
+    "Region_state": "West Murray Zone",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2019/01",
+    "trigger": "Disconnection of line, resulting in the isolation of the weak nodes",
+    "duration": "2 seconds",
+    "frequency": "7",
+    "involved_devices": "Photovoltaic plant",
+    "propagation": "Contained in West Murray Zone",
+    "distance": "483",
+    "radius": 483,
+    "outages": "No",
+    "identification": "Protection devices recordings",
+    "method": "Transient simulation with EMT models",
+    "purported": "Weak grid",
+    "mitigation_measures": "Installation of synchronous condensers",
+    "possible_mechanism": "PLL Instability",
+    "images": [
+      "images/WMZ_7Hz-Line.jpg",
+      "images/WMZ_7Hz-Oscilations.jpg"
+    ],
+    "links": [
+      "https://www.e-cigre.org/publications/detail/cse020-cse-020.html",
+      "https://www.esig.energy/wp-content/uploads/2024/08/ESIG-Oscillations-Guide-2024.pdf#page=76.08",
+      "https://www.sciencedirect.com/science/article/pii/S036054422302042X"
+    ],
+    "coordinates": "-31.973619, 141.461222",
+    "first_observation": "2016",
+    "grid": "Australia, West Murray Zone",
+    "points": [
+      {
+        "name": "Silverton Wind Farm",
+        "coordinates": "-31.806460, 141.268603",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Broken Hill solar Plant",
+        "coordinates": "-31.985218, 141.394265",
+        "icon_type": "solar",
+        "guilty": true
+      },
+      {
+        "name": "Buronga",
+        "coordinates": "-34.1034147317411, 142.25964671449267",
+        "icon_type": "substation",
+        "guilty": true
+      },
+      {
+        "name": "Kerang",
+        "coordinates": "-35.7714288180139, 143.9348538918743",
+        "icon_type": "substation",
+        "guilty": true
+      }
+    ],
+    "connections": [
+      {
+        "from": "Silverton Wind Farm",
+        "to": "Broken Hill solar Plant",
+        "color": "gray"
+      },
+      {
+        "from": "Broken Hill solar Plant",
+        "to": "Buronga",
+        "Kerang": "gray"
+      },
+      {
+        "from": "Buronga",
+        "to": "Kerang",
+        "color": "gray"
+      },
+      {
+        "from": "Broken Hill solar Plant",
+        "to": "9",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "country": "China",
+    "Region_state": "North West",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2015/07",
+    "trigger": "Not identified",
+    "duration": "3.3 hours",
+    "frequency": "19-33",
+    "involved_devices": "Wind farm - Type IV",
+    "propagation": "Contained in Xinjiang Uygur Autonomous Region",
+    "distance": "197.2",
+    "radius": 197.2,
+    "outages": "Generator Trip",
+    "identification": "PMU Data",
+    "method": "Transient simulation with EMT models",
+    "purported": "Weak grid followed by torsional resonance",
+    "mitigation_measures": "Adjusting the control parameters of GSC and PLL",
+    "possible_mechanism": "PLL Instability",
+    "images": [
+      "images/One-line_Xinjiang_China_NW.png",
+      "images/Frequency_Xinjiang_China_NW.png"
+    ],
+    "links": [
+      "https://ieeexplore.ieee.org/document/7878693",
+      "https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/iet-rpg.2017.0740"
+    ],
+    "coordinates": "40.1739, 97.3214",
+    "first_observation": "2015/07",
+    "grid": "China, North West",
+    "points": [],
+    "connections": []
+  },
+  {
+    "id": 11,
+    "country": "China",
+    "Region_state": "Hebei (North China)",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2013/02",
+    "trigger": "Not identified",
+    "duration": "500 s (recorded, but the event is longer)",
+    "frequency": "6-8",
+    "involved_devices": "Wind farm - Type III",
+    "propagation": "Contained in Hebei",
+    "distance": "Not identified",
+    "radius": 100,
+    "outages": "Generator Trip",
+    "identification": "Protection devices recordings",
+    "method": "Transient simulation with EMT models",
+    "purported": "Not recorded",
+    "mitigation_measures": "Bypassing FSCs when SSR is detected",
+    "possible_mechanism": "Unknown",
+    "images": [
+      "images/GuyuanWindFarm_Hebei_China.png",
+      "images/GuyuanWindFarm_Hebei_China_waveform.png",
+      "images/GuyuanWindFarm_Hebei_China_SSFreq.png",
+      "images/GuyuanWindFarm_Hebei_China_RMS_currents.png"
+    ],
+    "links": [
+      "https://ieeexplore-ieee-org.recursos.biblioteca.upc.edu/document/6949171"
+    ],
+    "coordinates": "41.539000, 115.572000",
+    "first_observation": "2012/12",
+    "grid": "China, Hebei (North China)",
+    "points": [],
+    "connections": []
+  },
+  {
+    "id": 12,
+    "country": "USA",
+    "Region_state": "Northeast Oregon",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2014/04",
+    "trigger": "Not identified",
+    "duration": "Several hours",
+    "frequency": "5 - 14",
+    "involved_devices": "Wind farm - Type IV",
+    "propagation": "Confined to the wind generation site",
+    "distance": "Not identified",
+    "radius": 100,
+    "outages": "No",
+    "identification": "PMU Data",
+    "method": "No analysis, just plots",
+    "purported": "There was a concern about the potential of similar interactions should a wind power plant become isolated on a series-compensated line.",
+    "mitigation_measures": "Tune new voltage control parameters",
+    "possible_mechanism": "Induction Generator Effect",
+    "images": [
+      "images/oregon_map.png",
+      "images/oregon_1.png",
+      "images/oregon_2.png",
+      "images/oregon_3.png"
+    ],
+    "links": [
+      "https://www.nerc.com/comm/PC_Reliability_Guidelines_DL/Reliability_Guideline_-_Forced_Oscillations_-_2017-07-31_-_FINAL.pdf"
+    ],
+    "coordinates": "45.6375, -120.605278",
+    "first_observation": "2011/05",
+    "grid": "USA, Northeast Oregon",
+    "points": [
+      {
+        "name": "Biglow Canyon Wind Farm",
+        "coordinates": "45.6375, -120.605278",
+        "icon_type": "wind",
+        "guilty": true
+      }
+    ],
+    "connections": []
+  },
+  {
+    "id": 13,
+    "country": "USA",
+    "Region_state": "Oklahoma",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2013/04",
+    "trigger": "Line outage",
+    "duration": "30 minutes",
+    "frequency": "3",
+    "involved_devices": "Wind farm - Type III",
+    "propagation": "Local, the event affected the operations at a nearby large industrial customer",
+    "distance": "Not identified",
+    "radius": 100,
+    "outages": "No",
+    "identification": "PMU Data",
+    "method": "FFT from data",
+    "purported": "Grid disturbances may excite one or a group of these sub-synchronous frequencies to begin to oscillate during high wind periods",
+    "mitigation_measures": "Power curtailment and tune new WPP power control parameters",
+    "possible_mechanism": "Unknown ",
+    "images": [
+      "images/og&e_map.png",
+      "images/og&e_2012.png",
+      "images/og&e_2013_v.png",
+      "images/og&e_2013_p.png"
+    ],
+    "links": [
+      "https://www.naspi.org/sites/default/files/reference_documents/14.pdf"
+    ],
+    "coordinates": "34.89896708898615, -98.57519897165932",
+    "first_observation": "2011/12",
+    "grid": "USA, Oklahoma",
+    "points": [
+      {
+        "name": "Blue Canyon Windpower",
+        "coordinates": "34.89896708898615, -98.57519897165932",
+        "icon_type": "wind",
+        "guilty": true
+      }
+    ],
+    "connections": []
+  },
+  {
+    "id": 14,
+    "country": "USA",
+    "Region_state": "Texas",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2011/01",
+    "trigger": "Line outage",
+    "duration": "Not recorded",
+    "frequency": "4",
+    "involved_devices": "Wind farm - Type III, Wind farm - Type IV",
+    "propagation": "Contained in Texas CREZ transmission system",
+    "distance": "273",
+    "radius": 273,
+    "outages": "No",
+    "identification": "PMU Data",
+    "method": "Not recorded",
+    "purported": "Weak grid",
+    "mitigation_measures": "Enhance the system strength or voltage controller tuning ",
+    "possible_mechanism": "Outer Loop - V Control",
+    "images": [
+      "images/One_line_diagram_CREZ.png",
+      "images/Voltage_response_CREZ.png",
+      "images/W_Wout_ridethrough_CREZ.png"
+    ],
+    "links": [
+      "https://ieeexplore.ieee.org/document/6344713"
+    ],
+    "coordinates": "35.25557, -101.1361 ",
+    "first_observation": "2011/01",
+    "grid": "USA, Texas",
+    "points": [
+      {
+        "name": "Panhandle Wind Project",
+        "coordinates": "35.416428748599174, -101.22946773284131",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Asarco Substation",
+        "coordinates": "35.28540610595221, -101.73066351205084",
+        "icon_type": "substation",
+        "guilty": true
+      },
+      {
+        "name": "Oklaunion Substation",
+        "coordinates": "34.08283529978634, -99.17810120609462",
+        "icon_type": "substation",
+        "guilty": true
+      },
+      {
+        "name": "Escalade Wind Farm",
+        "coordinates": "33.746457879215306, -99.6654337619544",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Aviator Wind",
+        "coordinates": "31.815538161875065, -100.69127193931365",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Austin substation",
+        "coordinates": "30.315259067826734, -97.8547524419021",
+        "icon_type": "substation",
+        "guilty": true
+      },
+      {
+        "name": "Sherbino Wind Farm",
+        "coordinates": "30.89053252758235, -102.39984150440283",
+        "icon_type": "wind",
+        "guilty": true
+      }
+    ],
+    "connections": [
+      {
+        "from": "Panhandle Wind Project",
+        "to": "Asarco Substation",
+        "color": "gray"
+      },
+      {
+        "from": "Panhandle Wind Project",
+        "to": "Oklaunion Substation",
+        "color": "gray"
+      },
+      {
+        "from": "Asarco Substation",
+        "to": "Escalade Wind Farm",
+        "color": "gray"
+      },
+      {
+        "from": "Escalade Wind Farm",
+        "to": "Oklaunion Substation",
+        "color": "gray"
+      },
+      {
+        "from": "Escalade Wind Farm",
+        "to": "Aviator Wind",
+        "color": "gray"
+      },
+      {
+        "from": "Aviator Wind",
+        "to": "Austin substation",
+        "color": "gray"
+      },
+      {
+        "from": "Aviator Wind",
+        "to": "Sherbino Wind Farm",
+        "color": "gray"
+      },
+      {
+        "from": "Sherbino Wind Farm",
+        "to": "Austin substation",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "country": "USA",
+    "Region_state": "Texas",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2009/01",
+    "trigger": "Line-to-ground fault leading to radial connection of wind farms with capacitors",
+    "duration": "150 millisecond",
+    "frequency": "20-30",
+    "involved_devices": "Wind farm - Type III",
+    "propagation": "Contained in Texas",
+    "distance": "100",
+    "radius": 100,
+    "outages": "Generator Trip",
+    "identification": "Protection devices recordings",
+    "method": "Transient simulation with EMT models",
+    "purported": "Induction Generator Effect: interaction between DFIG circuit and RLC circuit.",
+    "mitigation_measures": "Decrease of capacitive compensation to 30%. Addition of subsynchronoous damping controllers.",
+    "possible_mechanism": "Induction Generator Effect",
+    "images": [
+      "images/Ajo_line.jpg",
+      "images/Ajo_oscillation.jpg"
+    ],
+    "links": [
+      "https://ieeexplore.ieee.org/document/6039426",
+      "http://resourcecenter.ieee-pes.org/tags/pes-tr80"
+    ],
+    "coordinates": "27.00315545167205, -97.58459126484729",
+    "first_observation": "2009/01",
+    "grid": "USA, Texas",
+    "points": [
+      {
+        "name": "Lon Hill",
+        "coordinates": "27.842723, -97.614613",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Gulf wind",
+        "coordinates": "27.00315545167205, -97.58459126484729",
+        "icon_type": "wind",
+        "guilty": true
+      },
+      {
+        "name": "Ajo",
+        "coordinates": "27.092287, -97.774934",
+        "icon_type": "substation",
+        "guilty": true
+      },
+      {
+        "name": "Rio Hondo",
+        "coordinates": "26.278575, -97.612171",
+        "icon_type": "substation",
+        "guilty": false
+      }
+    ],
+    "connections": [
+      {
+        "from": "Ajo",
+        "to": "Lon Hill",
+        "color": "gray"
+      },
+      {
+        "from": "Ajo",
+        "to": "Rio Hondo",
+        "color": "gray"
+      },
+      {
+        "from": "Ajo",
+        "to": "Gulf wind",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "country": "USA",
+    "Region_state": "Minnesota",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2007/10",
+    "trigger": "Radial connection due to switching procedure",
+    "duration": "Not recorded",
+    "frequency": "9.44",
+    "involved_devices": "Wind farm - Type III",
+    "propagation": "Contained in south central Minnesota",
+    "distance": "Not identified",
+    "radius": 100,
+    "outages": "No",
+    "identification": "Digital fault recorders",
+    "method": "Transient simulation with EMT models, Modal analysis",
+    "purported": "Induction Generator Effect (rotor vs. RLC)",
+    "mitigation_measures": "Protective Relays",
+    "possible_mechanism": "Induction Generator Effect",
+    "images": [
+      "images/One_line_Minnesota.png",
+      "images/Oscillation_Minnesota.png"
+    ],
+    "links": [
+      "https://resourcecenter.ieee-pes.org/publications/technical-reports/pes_tp_tr80_amps_wsso_070920"
+    ],
+    "coordinates": "43.621187354940254, -92.59856150700715",
+    "first_observation": "2007/10",
+    "grid": "USA, Minnesota",
+    "points": [
+      {
+        "name": "Xcel Energy Mower County Wind Farm",
+        "coordinates": "43.621187354940254, -92.59856150700715",
+        "icon_type": "wind",
+        "guilty": true
+      }
+    ],
+    "connections": []
+  },
+  {
+    "id": 17,
+    "country": "China",
+    "Region_state": "South-west (Yunnan and Guangxi)",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2018/01",
+    "trigger": "Switching-on of a second STATCOM",
+    "duration": "Not recorded",
+    "frequency": "2.5, 97.5",
+    "involved_devices": "HVDC station",
+    "propagation": "Contained in Yunnan and Guangxi",
+    "distance": "Not identified",
+    "radius": 100,
+    "outages": "No",
+    "identification": "Protection devices recordings",
+    "method": "Transient simulation with EMT models, Eigenvalue analysis",
+    "purported": "Interaction of STATCOM with weak grid.  Grid strength and number of STATCOM have an impact.",
+    "mitigation_measures": "Avoid situations leading to a weak interconnection, i.e. avoid outage of one of the two lines",
+    "possible_mechanism": "Unknown ",
+    "images": [
+      "images/HVDC_China_Yunnan_Guangxi_line.jpg",
+      "images/HVDC_China_Yunnan_Guangxi_Oscillation.jpg"
+    ],
+    "links": [
+      "https://ieeexplore-ieee-org.recursos.biblioteca.upc.edu/document/8094985"
+    ],
+    "coordinates": "24.32429667446203, 104.94492424877794",
+    "first_observation": "2018/01",
+    "grid": "China, South-west (Yunnan and Guangxi)",
+    "points": [],
+    "connections": []
+  },
+  {
+    "id": 18,
+    "country": "Scotland",
+    "Region_state": "North",
+    "europe": true,
+    "repetitive": false,
+    "last_observation": "2023/08",
+    "trigger": "Not identified",
+    "duration": "25 seconds",
+    "frequency": "3-20",
+    "involved_devices": "Wind farm - Type IV",
+    "propagation": "Contained in Scotland",
+    "distance": "Not identified",
+    "radius": 100,
+    "outages": "Generator Trip",
+    "identification": "PMU Data",
+    "method": "Transient simulation with EMT models",
+    "purported": "Controls and dynamic behavior of a particular asset. Problems with phase-locked loops",
+    "mitigation_measures": "Reduction of output. After solution, returned to service",
+    "possible_mechanism": "PLL Instability",
+    "images": [
+      "images/Scotland_North_Line.png",
+      "images/Scotland_North_Ocillations.png"
+    ],
+    "links": [
+      "https://www.neso.energy/document/319056/download",
+      "https://www.esig.energy/download/managing-grid-stability-in-a-high-ibr-network-julian-leslie/?wpdmdl=8504&refresh=61f14353799ba1643201363"
+    ],
+    "coordinates": "57.425222, -4.263278",
+    "first_observation": "2021/08",
+    "grid": "Scotland, North",
+    "points": [
+      {
+        "name": "Hywind Offshore Wind Farm",
+        "coordinates": "57.499166301178604, -1.6939432161623154",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Peterhead Substation",
+        "coordinates": "57.477720205664646, -1.8026416340052989",
+        "icon_type": "substation",
+        "guilty": true
+      }
+    ],
+    "connections": [
+      {
+        "from": "Hywind Offshore Wind Farm",
+        "to": "Peterhead Substation",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "country": "USA",
+    "Region_state": "Virginia",
+    "europe": false,
+    "repetitive": false,
+    "last_observation": "2020/12",
+    "trigger": "Daylight hours",
+    "duration": "Minutes",
+    "frequency": "22",
+    "involved_devices": "Photovoltaic plant",
+    "propagation": "Contained in Virginia",
+    "distance": "Not identified",
+    "radius": 100,
+    "outages": "No",
+    "identification": "PMU Data, Synchrophasor",
+    "method": "Data-driven identification of modes",
+    "purported": "Outer loop control, particularly P loop. Interaction with DC side.",
+    "mitigation_measures": "~",
+    "possible_mechanism": "DC and AC sides energy unbalance",
+    "images": [
+      "images/USA_Virginia_Line.png",
+      "images/USA_Virginia_Oscillations.png"
+    ],
+    "links": [
+      "https://ieeexplore.ieee.org/abstract/document/9916830"
+    ],
+    "coordinates": "37.525750, -77.448361",
+    "first_observation": "2020/07",
+    "grid": "USA, Virginia",
+    "points": [
+      {
+        "name": "Bedford Solar Center",
+        "coordinates": "36.697223688075596, -76.17117303177248",
+        "icon_type": "solar",
+        "guilty": false
+      },
+      {
+        "name": "Dominion Energy - Fentress Substation",
+        "coordinates": "36.6919429253031, -76.1891242090584",
+        "icon_type": "substation",
+        "guilty": true
+      },
+      {
+        "name": "Dominion Energy - Yadkin Substation",
+        "coordinates": "36.77022536358671, -76.35362649693198",
+        "icon_type": "substation",
+        "guilty": true
+      },
+      {
+        "name": "Midlothian Substation",
+        "coordinates": "37.50296409524861, -77.70528895464328",
+        "icon_type": "substation",
+        "guilty": true
+      },
+      {
+        "name": "Bremo Substation",
+        "coordinates": "37.71015433765302, -78.28704659074137",
+        "icon_type": "substation",
+        "guilty": true
+      }
+    ],
+    "connections": [
+      {
+        "from": "Bedford Solar Center",
+        "to": "Dominion Energy - Fentress Substation",
+        "color": "gray"
+      },
+      {
+        "from": "Dominion Energy - Fentress Substation",
+        "to": "Dominion Energy - Yadkin Substation",
+        "color": "gray"
+      },
+      {
+        "from": "Dominion Energy - Yadkin Substation",
+        "to": "Midlothian Substation",
+        "color": "gray"
+      },
+      {
+        "from": "Midlothian Substation",
+        "to": "Bremo Substation",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "country": "United Kingdom",
+    "Region_state": "England, Wales, and Scotland",
+    "europe": true,
+    "repetitive": false,
+    "last_observation": "2019/08",
+    "trigger": "Lightning",
+    "duration": "30 milli seconds",
+    "frequency": "9",
+    "involved_devices": "Wind farm - Type IV, Synchronus machine",
+    "propagation": "Propagated across England, Wales and Scotland",
+    "distance": "100 km between Hornsea and Little Barford",
+    "radius": 100,
+    "outages": "Line Trip, Generator Trip",
+    "identification": "Protection devices recordings",
+    "method": "Not detailed in the report",
+    "purported": "Incorrect protection settings at Hornsea and Little Barford. Also controls at Hornsea. ",
+    "mitigation_measures": "Retuning and revision of protection settings",
+    "possible_mechanism": "LVRT",
+    "images": [
+      "images/Hornsea_line.png",
+      "images/Hornsea_Oscillations.png"
+    ],
+    "links": [
+      "https://www.neso.energy/document/152346/download"
+    ],
+    "coordinates": "53.638405383827326, -0.30179291534274105",
+    "first_observation": "2019/08",
+    "grid": "United Kingdom, England, Wales, and Scotland",
+    "points": [
+      {
+        "name": "Hornsea Offshore Wind Farm",
+        "coordinates": "53.96642728448614, -0.03848713687208887",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Little Barford",
+        "coordinates": "52.2063969201011, -0.2685025336192183",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Wymondley Substation",
+        "coordinates": "51.9285304306443, -0.24596358644156935",
+        "icon_type": "substation",
+        "guilty": false
+      }
+    ],
+    "connections": [
+      {
+        "from": "Hornsea Offshore Wind Farm",
+        "to": "Little Barford",
+        "color": "gray"
+      },
+      {
+        "from": "Little Barford",
+        "to": "Wymondley Substation",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "country": "Finland",
+    "Region_state": "Finland",
+    "europe": true,
+    "repetitive": false,
+    "last_observation": "2022/06",
+    "trigger": "~",
+    "duration": "9 hours",
+    "frequency": "5-6",
+    "involved_devices": "Wind farm - Type IV",
+    "propagation": "Propagated across Finland",
+    "distance": "500 km",
+    "radius": 500,
+    "outages": "~",
+    "identification": "PMU Data",
+    "method": "WAMS analysis",
+    "purported": "SSCI involving wind farms and series compensated lines",
+    "mitigation_measures": "Continuous monitoring using PMU",
+    "possible_mechanism": "Wind farm and series compenseated line",
+    "images": [
+      "images/Finland.png",
+      "images/Finland_T4_Oscillation_1.png",
+      "images/Finland_T4_Oscillation_2.png"
+    ],
+    "links": [
+      "https://energiforsk.se/media/33835/1_fingrid_subsynchronous_oscillations_in_finnish_power_system_clean.pdf"
+    ],
+    "coordinates": "64.00670434066613, 24.889883793953896",
+    "first_observation": "2022/06",
+    "grid": "Finland",
+    "points": [
+      {
+        "name": "Isonevan tuulivoimapuisto",
+        "coordinates": "64.75149988991944, 24.792140018492773",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Siikajoki sähköasema",
+        "coordinates": "64.6795864839863, 25.06231236772104",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Pikkarala sähköasema",
+        "coordinates": "64.91774774377323, 25.737867285171884",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Isokangas sähköasema",
+        "coordinates": "65.26640644305178, 25.69504839683111",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Tuomela sähköasema",
+        "coordinates": "65.55824908685125, 25.604636768226836",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Pirttikoski sähköasema",
+        "coordinates": "66.33946726366345, 27.140229700917043",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Rauma sähköasema",
+        "coordinates": "61.152392104492115, 21.623620137396774",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Kangasalan sähköasema",
+        "coordinates": "61.49679205153356, 23.976077170378815",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Toivilan sähköasema",
+        "coordinates": "61.89287314468664, 25.128629864706788",
+        "icon_type": "substation",
+        "guilty": false
+      }
+    ],
+    "connections": [
+      {
+        "from": "Isonevan tuulivoimapuisto",
+        "to": "Siikajoki sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Siikajoki sähköasema",
+        "to": "Pikkarala sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Isokangas sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Tuomela sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Pirttikoski sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Rauma sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Kangasalan sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Toivilan sähköasema",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "country": "Finland",
+    "Region_state": "Finland",
+    "europe": true,
+    "repetitive": true,
+    "last_observation": "2023/02",
+    "trigger": "~",
+    "duration": "15 minutes",
+    "frequency": "26-28",
+    "involved_devices": "Wind farm - Type III",
+    "propagation": "Propagated across Finland",
+    "distance": "500 km",
+    "radius": 500,
+    "outages": "~",
+    "identification": "PMU Data",
+    "method": "WAMS analysis",
+    "purported": "SSCI involving wind farms and series compensated lines during low power output",
+    "mitigation_measures": "Continuous monitoring using PMU",
+    "possible_mechanism": "Wind farm and series compenseated line",
+    "images": [
+      "images/Finland.png",
+      "images/Finland_T3_Oscillation_1.png",
+      "images/Finland_T3_Oscillation_2.png"
+    ],
+    "links": [
+      "https://energiforsk.se/media/33835/1_fingrid_subsynchronous_oscillations_in_finnish_power_system_clean.pdf"
+    ],
+    "coordinates": "63.305614527120085, 24.94257783715194",
+    "first_observation": "2023/02",
+    "grid": "Finland",
+    "points": [
+      {
+        "name": "Möksyn tuulivoimapuisto",
+        "coordinates": "63.00624547166976, 24.373692152869634",
+        "icon_type": "wind",
+        "guilty": false
+      },
+      {
+        "name": "Alajärven sähköasema Substation",
+        "coordinates": "63.03244732847235, 24.166991367780124",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Pikkarala sähköasema",
+        "coordinates": "64.91774774377323, 25.737867285171884",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Isokangas sähköasema",
+        "coordinates": "65.26640644305178, 25.69504839683111",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Tuomela sähköasema",
+        "coordinates": "65.55824908685125, 25.604636768226836",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Pirttikoski sähköasema",
+        "coordinates": "66.33946726366345, 27.140229700917043",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Rauma sähköasema",
+        "coordinates": "61.152392104492115, 21.623620137396774",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Kangasalan sähköasema",
+        "coordinates": "61.49679205153356, 23.976077170378815",
+        "icon_type": "substation",
+        "guilty": false
+      },
+      {
+        "name": "Toivilan sähköasema",
+        "coordinates": "61.89287314468664, 25.128629864706788",
+        "icon_type": "substation",
+        "guilty": false
+      }
+    ],
+    "connections": [
+      {
+        "from": "Möksyn tuulivoimapuisto",
+        "to": "Alajärven sähköasema Substation",
+        "color": "gray"
+      },
+      {
+        "from": "Alajärven sähköasema Substation",
+        "to": "Pikkarala sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Isokangas sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Tuomela sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Pirttikoski sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Rauma sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Kangasalan sähköasema",
+        "color": "gray"
+      },
+      {
+        "from": "Pikkarala sähköasema",
+        "to": "Toivilan sähköasema",
+        "color": "gray"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "country": "Spain",
+    "Region_state": "Spain",
+    "europe": true,
+    "repetitive": true,
+    "last_observation": "2025/04",
+    "trigger": "Unknown (not identified yet)",
+    "duration": "15 minutes",
+    "frequency": "0.22",
+    "involved_devices": "Synchronous machine",
+    "propagation": "Propagated across Europe",
+    "distance": "1500",
+    "radius": 500,
+    "outages": "Solar Photovoltaic plants and Synchronous machines, Transmission lines",
+    "identification": "PMU Data",
+    "method": "~",
+    "purported": "Unknown (not identified yet)",
+    "mitigation_measures": "~",
+    "possible_mechanism": "~",
+    "images": [
+      "images/Spain_oscillation.jpg",
+      "images/Spain_frequency.jpg"
+    ],
+    "links": [],
+    "coordinates": "40.416, -3.70256",
+    "first_observation": "2025/04",
+    "grid": "Spain",
+    "points": [],
+    "connections": []
+  }
+]
