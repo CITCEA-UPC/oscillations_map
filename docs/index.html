@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <script data-goatcounter="https://alexandregracia.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -142,7 +143,14 @@
             z-index: 1000;
         }
 
-        #oscillation-counter {
+        #bottom-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #oscillation-counter,
+        #visit-counter {
             font-size: 15px;
             font-weight: 500;
             padding: 8px 16px;
@@ -618,7 +626,10 @@
     </div>
 
     <div id="bottom-bar">
-        <div id="oscillation-counter">Oscillations: 0</div>
+        <div id="bottom-left">
+            <div id="oscillation-counter">Oscillations: 0</div>
+            <div id="visit-counter">Visits: --</div>
+        </div>
         <div class="logo-container">
             <img src="images/LogoCitceaUPC.png" alt="CITCEA UPC">
             <img src="images/upc-positiu-p3005.png" alt="UPC">
@@ -989,6 +1000,26 @@
             clearMap();
             closeSidePanel();
         });
+
+        // Nuevo sistema de contadores: suma 304 porque ahora se cuenta distinto
+        // (303 visitas legacy del antiguo visits.json + 1 por la visita actual)
+        fetch('https://api.countapi.xyz/get/citcea.oscillations.upc.edu/visits')
+            .then(r => r.json())
+            .then(d => {
+                if (d.value === 0) {
+                    return fetch('https://api.countapi.xyz/set/citcea.oscillations.upc.edu/visits?value=304')
+                        .then(r => r.json());
+                } else {
+                    return fetch('https://api.countapi.xyz/hit/citcea.oscillations.upc.edu/visits')
+                        .then(r => r.json());
+                }
+            })
+            .then(d => {
+                document.getElementById('visit-counter').innerText = `Visits: ${d.value}`;
+            })
+            .catch(() => {
+                document.getElementById('visit-counter').innerText = 'Visits: -';
+            });
     </script>
 </body>
 
