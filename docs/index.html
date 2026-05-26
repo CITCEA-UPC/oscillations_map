@@ -1003,19 +1003,25 @@
 
         // Nuevo sistema de contadores: suma 304 porque ahora se cuenta distinto
         // (303 visitas legacy del antiguo visits.json + 1 por la visita actual)
-        fetch('https://api.countapi.xyz/get/citcea.oscillations.upc.edu/visits')
+        const COUNTER_KEY = 'citcea-upc-oscillations-map-visits';
+        const COUNTER_BASE = 'https://countapi.mileshilliard.com/api/v1';
+
+        fetch(`${COUNTER_BASE}/get/${COUNTER_KEY}`)
             .then(r => r.json())
             .then(d => {
+                if (!d || d.value === undefined) throw new Error('Invalid response');
                 if (d.value === 0) {
-                    return fetch('https://api.countapi.xyz/set/citcea.oscillations.upc.edu/visits?value=304')
+                    return fetch(`${COUNTER_BASE}/set/${COUNTER_KEY}?value=304`)
                         .then(r => r.json());
                 } else {
-                    return fetch('https://api.countapi.xyz/hit/citcea.oscillations.upc.edu/visits')
+                    return fetch(`${COUNTER_BASE}/hit/${COUNTER_KEY}`)
                         .then(r => r.json());
                 }
             })
             .then(d => {
-                document.getElementById('visit-counter').innerText = `Visits: ${d.value}`;
+                if (d && d.value !== undefined) {
+                    document.getElementById('visit-counter').innerText = `Visits: ${d.value}`;
+                }
             })
             .catch(() => {
                 document.getElementById('visit-counter').innerText = 'Visits: -';
