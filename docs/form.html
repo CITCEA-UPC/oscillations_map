@@ -4,7 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Data Entry Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #0f2444;
+            --primary-dark: #09162e;
+            --primary-light: #1a3a6b;
+            --accent: #4a9eff;
+            --success: #28a745;
+            --success-hover: #34ce57;
+            --text: #1a1a2e;
+            --text-secondary: #555;
+            --bg: #f0f2f5;
+            --white: #fff;
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -12,110 +33,177 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg), #e0e5ec);
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
-            background: white;
-            padding: 2vh;
-            border-radius: 1.5vh;
-            box-shadow: 0 0 2vh rgba(0, 0, 0, 0.1);
-            width: 80vw;
-            max-width: 50vw;
+            background: var(--white);
+            padding: 28px 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 640px;
             max-height: 90vh;
             overflow-y: auto;
+            margin-top: 20px;
+            animation: slideUp 0.3s ease;
+        }
+
+        .container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .container::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 3px;
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h2 {
             text-align: center;
-            font-size: 3vh;
-            margin-bottom: 2vh;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .notice {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #8d6e00;
+            line-height: 1.5;
         }
 
         label {
-            font-weight: bold;
+            font-weight: 600;
             display: block;
-            font-size: 1.8vh;
-            margin-top: 1.5vh;
+            font-size: 13px;
+            color: var(--text);
+            margin-top: 16px;
+            margin-bottom: 4px;
         }
 
-        input, textarea {
+        input,
+        textarea {
             width: 100%;
-            padding: 1.5vh;
-            margin-top: 0.5vh;
-            border: 0.3vh solid #ccc;
-            border-radius: 0.8vh;
-            font-size: 1.8vh;
-            background-color: #fff;
+            padding: 10px 14px;
+            border: 1.5px solid #d0d5dd;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-family: inherit;
+            background: var(--white);
+            color: var(--text);
+            transition: border-color var(--transition), box-shadow var(--transition);
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.15);
         }
 
         textarea {
-            height: 10vh;
+            height: 100px;
             resize: vertical;
         }
 
-        input::placeholder, textarea::placeholder {
-            font-size: 1.6vh;
-            color: #888;
+        input::placeholder,
+        textarea::placeholder {
+            font-size: 13px;
+            color: #aaa;
         }
 
         .checkbox-group {
             display: flex;
             align-items: center;
-            margin-top: 1vh;
-            font-size: 1.8vh;
+            gap: 8px;
+            margin-top: 12px;
         }
 
         .checkbox-group input {
             width: auto;
-            height: 2vh;
-            margin-right: 1vh;
+            height: 18px;
+            margin: 0;
+            accent-color: var(--primary-light);
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 500;
         }
 
         .submit-btn {
-            background-color: #28a745;
-            color: white;
-            padding: 1.5vh;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            padding: 12px 24px;
             border: none;
-            border-radius: 1vh;
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            font-size: 2vh;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
             width: 100%;
-            margin-top: 3vh;
+            margin-top: 24px;
+            transition: all var(--transition);
+            box-shadow: 0 4px 14px rgba(15, 36, 68, 0.25);
         }
 
         .submit-btn:hover {
-            background-color: #218838;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(15, 36, 68, 0.35);
         }
 
-        .container::-webkit-scrollbar {
-            width: 0.8vh;
+        .submit-btn:active {
+            transform: translateY(0);
         }
 
-        .container::-webkit-scrollbar-thumb {
-            background: #bbb;
-            border-radius: 0.5vh;
-        }
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
 
-        .container::-webkit-scrollbar-track {
-            background: #f4f4f4;
-        }
+            .container {
+                padding: 20px;
+                max-height: 95vh;
+                margin-top: 8px;
+            }
 
-        .notice {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-radius: 0.8vh;
-            padding: 1.5vh;
-            margin-bottom: 2vh;
-            font-size: 1.6vh;
-            color: #856404;
+            h2 {
+                font-size: 18px;
+            }
+
+            input,
+            textarea {
+                font-size: 13px;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
@@ -123,7 +211,7 @@
 <div class="container">
     <h2>Add a New Data Point</h2>
     <div class="notice">
-        ⚠️ This form is a reference only. To submit new data, please contact the research team directly via email.
+        This form is a reference only. To submit new data, please contact the research team directly via email.
     </div>
     <form method="post" action="javascript:alert('Form submission is disabled in the static version. Please contact the research team.')">
         <label for="id">ID:</label>

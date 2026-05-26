@@ -8,20 +8,44 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        #map {
-            position: absolute;
-            top: 60px;
-            bottom: 60px;
-            left: 10px;
-            right: 10px;
-            width: calc(100% - 20px);
-            height: calc(100vh - 130px);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            background: #f8f8f8;
-            z-index: 0;
+        :root {
+            --primary: #0f2444;
+            --primary-dark: #09162e;
+            --primary-light: #1a3a6b;
+            --accent: #4a9eff;
+            --accent-hover: #6db3ff;
+            --success: #28a745;
+            --success-hover: #34ce57;
+            --text: #1a1a2e;
+            --text-secondary: #555;
+            --text-muted: #888;
+            --bg: #f0f2f5;
+            --white: #fff;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --header-height: 64px;
+            --bottom-height: 64px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            overflow: hidden;
         }
 
         #header-bar {
@@ -29,242 +53,521 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: white;
-            color: black;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            padding: 15px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            height: var(--header-height);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--primary-light));
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
             z-index: 1000;
+            gap: 12px;
         }
 
+        #header-title {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            white-space: nowrap;
+            background: linear-gradient(90deg, #fff, #c8d6e5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #header-buttons {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        #header-buttons button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            height: 36px;
+            padding: 0 16px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all var(--transition);
+            white-space: nowrap;
+        }
+
+        #excel-button {
+            background: var(--success);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+        }
+
+        #excel-button:hover {
+            background: var(--success-hover);
+            box-shadow: 0 4px 14px rgba(40, 167, 69, 0.4);
+            transform: translateY(-1px);
+        }
+
+        #excel-button svg {
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        #info-button {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            backdrop-filter: blur(4px);
+        }
+
+        #info-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+        }
 
         #bottom-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: white;
-            color: black;
+            height: var(--bottom-height);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-            border-top: 1px solid #ddd;
-            box-sizing: border-box;
+            padding: 0 24px;
+            box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
         }
 
+        #oscillation-counter {
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+        }
 
+        .logo-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
 
+        .logo-container img {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.9;
+            transition: opacity var(--transition);
+        }
 
-        #fullscreen-image {
+        .logo-container img:hover {
+            opacity: 1;
+        }
+
+        #map {
+            position: absolute;
+            top: calc(var(--header-height) + 8px);
+            bottom: calc(var(--bottom-height) + 8px);
+            left: 8px;
+            right: 8px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            background: var(--bg);
+            z-index: 0;
+        }
+
+        #image-viewer {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
-            text-align: center;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
             align-items: center;
             justify-content: center;
-            z-index: 1002;
+            z-index: 1199;
+            animation: fadeIn 0.2s ease;
         }
 
-        #fullscreen-image img {
+        #image-viewer.side-panel-open {
+            background: rgba(0, 0, 0, 0.85);
+        }
+
+        #image-viewer img {
             max-width: 90%;
-            max-height: 90%;
-            margin: auto;
+            max-height: 94%;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            object-fit: contain;
+        }
+
+        #image-viewer .viewer-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition);
+            z-index: 1;
+        }
+
+        #image-viewer .viewer-close:hover {
+            background: rgba(0, 0, 0, 0.8);
         }
 
         .popup-image-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
-
+            gap: 6px;
+            margin-top: 8px;
         }
 
         .popup-image-grid img {
-            width: 100px;
-            height: auto;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
             cursor: pointer;
-            border: 1px solid black;
-            padding: 2px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            transition: transform var(--transition), box-shadow var(--transition);
         }
 
-
-        #oscillation-counter {
-            font-size: 16px;
-            font-weight: bold;
-            padding: 8px 15px;
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        .logo-container {
-            display: flex;
-            gap: 15px;
-            flex-wrap: nowrap;
-            padding-right: 20px;
-        }
-
-        .logo-container img {
-            height: 40px;
-            width: auto;
-            max-width: 100px;
-            object-fit: contain;
-        }
-
-        #info-button {
-
-            position: fixed;
-            top: 10px;
-            right: 15px;
-            background: #3399ff;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1001;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease-in-out;
-        }
-
-        #info-button:hover {
-            background: #66b3ff;
+        .popup-image-grid img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .popup-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
             align-items: center;
             justify-content: center;
-            z-index: 1200;
+            z-index: 1500;
+            animation: fadeIn 0.2s ease;
+            padding: 20px;
         }
 
         .popup-content {
-            background: white;
-            padding: 20px;
-            width: 60%;
-            max-width: 700px;
-            text-align: justify;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            background: var(--white);
+            padding: 32px;
+            width: 100%;
+            max-width: 640px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
             position: relative;
+            line-height: 1.7;
+            color: var(--text);
         }
 
-        .close-btn {
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            font-size: 24px;
+        .popup-content h2 {
+            margin: 0 0 16px;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .popup-content p {
+            margin: 0 0 12px;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .popup-content ul {
+            margin: 0 0 16px;
+            padding-left: 24px;
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .popup-content ul li {
+            margin-bottom: 4px;
+        }
+
+        .popup-content .close-btn {
+            position: sticky;
+            float: right;
+            top: 0;
+            font-size: 28px;
+            line-height: 1;
             cursor: pointer;
-        }
-
-        .close-btn:hover {
-            color: red;
-        }
-
-        #excel-button {
-            position: fixed;
-            top: 10px;
-            right: 110px;
-            background: #28a745;
-            color: white;
+            color: var(--text-muted);
+            transition: color var(--transition);
+            background: none;
             border: none;
-            padding: 8px 15px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1001;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease-in-out;
+            padding: 0;
+            font-family: inherit;
         }
 
-        #excel-button:hover {
-            background: #5cb85c;
+        .popup-content .close-btn:hover {
+            color: #e74c3c;
         }
 
-        #info-button,
-        #excel-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 40px;
+        .popup-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .popup-content::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 3px;
         }
 
         .side-panel {
             position: fixed;
-            top: 67px;
-            right: -300px;
-            width: 350px;
-            height: 79%;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: right 0.3s ease;
-            z-index: 1200;
-            overflow-y: auto;
-            padding: 20px;
-            margin-right: 10px;
-            display: none;
+            top: calc(var(--header-height) + 12px);
+            right: -380px;
+            width: 380px;
+            max-width: calc(100vw - 24px);
+            height: calc(100vh - var(--header-height) - var(--bottom-height) - 24px);
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            transition: right var(--transition);
+            z-index: 1201;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin-right: 8px;
         }
 
         .side-panel.open {
-            right: 5px;
-            display: block;
+            right: 0;
         }
 
         .side-panel-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 15px;
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid #eee;
+            flex-shrink: 0;
         }
 
         .side-panel-header h2 {
             margin: 0;
-            font-size: 15px;
-            color: #333;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.2px;
+        }
+
+        .side-panel-header .close-btn {
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color var(--transition);
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
+        }
+
+        .side-panel-header .close-btn:hover {
+            color: #e74c3c;
         }
 
         .side-panel-body {
-            font-size: 12px;
-            color: #555;
-            line-height: 1.6;
+            padding: 16px 20px 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            overflow-y: auto;
+            flex: 1;
         }
 
-        .side-panel-body p {
-            margin: 0 0 10px;
+        .side-panel-body b {
+            color: var(--text);
+            font-weight: 600;
         }
 
-
-
-
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            cursor: pointer;
+        .side-panel-body a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            word-break: break-all;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        .side-panel-body a:hover {
+            text-decoration: underline;
+        }
+
+        .side-panel-body .field {
+            margin-bottom: 3px;
+            line-height: 1.65;
+        }
+
+        .side-panel-body .field b {
+            display: inline-block;
+            min-width: 110px;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .side-panel-body::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .side-panel-body::-webkit-scrollbar-thumb {
+            background: #d0d0d0;
+            border-radius: 3px;
+        }
+
+        .side-panel-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --header-height: 56px;
+                --bottom-height: 56px;
+            }
+
+            #header-bar {
+                padding: 0 12px;
+            }
+
+            #header-title {
+                font-size: 15px;
+            }
+
+            #header-buttons button {
+                height: 32px;
+                padding: 0 12px;
+                font-size: 12px;
+            }
+
+            #header-buttons button span.btn-text {
+                display: none;
+            }
+
+            #excel-button svg {
+                margin-right: 0;
+            }
+
+            #bottom-bar {
+                padding: 0 12px;
+            }
+
+            #oscillation-counter {
+                font-size: 13px;
+                padding: 6px 12px;
+            }
+
+            .logo-container img {
+                height: 28px;
+            }
+
+            .logo-container {
+                gap: 8px;
+            }
+
+            .side-panel {
+                width: calc(100vw - 16px);
+                max-width: calc(100vw - 16px);
+                right: calc(-100vw - 8px);
+                top: calc(var(--header-height) + 8px);
+                height: calc(100vh - var(--header-height) - var(--bottom-height) - 16px);
+                margin-right: 4px;
+                border-radius: var(--radius-sm);
+            }
+
+            .side-panel.open {
+                right: 4px;
+            }
+
+            .side-panel-body {
+                font-size: 12px;
+                padding: 12px 16px 16px;
+            }
+
+            #image-viewer.side-panel-open {
+                width: 100%;
+            }
+
+            #image-viewer img {
+                max-width: 85%;
+                max-height: 80%;
+            }
+
+            .popup-content {
+                padding: 20px;
+                max-height: 90vh;
+            }
+
+            .popup-content h2 {
+                font-size: 18px;
+            }
+
+            .popup-content p,
+            .popup-content ul {
+                font-size: 14px;
+            }
+
+            #map {
+                top: calc(var(--header-height) + 4px);
+                bottom: calc(var(--bottom-height) + 4px);
+                left: 4px;
+                right: 4px;
+                border-radius: var(--radius-sm);
+            }
+
+            .popup-image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            #header-title {
+                font-size: 13px;
+            }
+
+            #header-buttons button {
+                height: 30px;
+                padding: 0 10px;
+                font-size: 11px;
+            }
+
+            .popup-image-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
     </style>
-
 
 </head>
 
@@ -274,24 +577,21 @@
         <div id="header-title">Power System Oscillations Map</div>
         <div id="header-buttons">
             <button id="excel-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    style="vertical-align: middle; margin-right: 5px;" viewBox="0 0 16 16">
-                    <path
-                        d="M5.884 6.68a.5.5 0 0 1 .524-.466h1.175a.5.5 0 0 1 .491.41l.662 3.32a.5.5 0 0 1-.491.59H6.4a.5.5 0 0 1-.491-.41L5.246 7.69a.5.5 0 0 1 .638-.59z" />
-                    <path
-                        d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM13.5 4.5H10a.5.5 0 0 1-.5-.5V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M5.884 6.68a.5.5 0 0 1 .524-.466h1.175a.5.5 0 0 1 .491.41l.662 3.32a.5.5 0 0 1-.491.59H6.4a.5.5 0 0 1-.491-.41L5.246 7.69a.5.5 0 0 1 .638-.59z" />
+                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM13.5 4.5H10a.5.5 0 0 1-.5-.5V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
                 </svg>
-                Download data sheet
+                <span class="btn-text">Download data sheet</span>
             </button>
-            <button id="info-button">ℹ️ Info</button>
+            <button id="info-button">Info</button>
         </div>
     </div>
 
-    <!-- source of imgaes: https://www.flaticon.com/search?word=energy-->
+    <!-- Icons source: https://www.flaticon.com/search?word=energy -->
 
     <div id="info-popup" class="popup-overlay">
         <div class="popup-content">
-            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <button class="close-btn" onclick="closePopup()">&times;</button>
             <h2>About This Map</h2>
             <p>
                 This map visualizes oscillation events in electrical grids. Each marker represents an observed event and
@@ -299,14 +599,11 @@
             </p>
             <p>
                 The marker colors reflect the recency of the event based on the <strong>last observation</strong> date.
-                A smooth color gradient is generated using chroma.js:
+                A smooth color gradient is generated:
             </p>
             <ul>
-                <li><strong>Blue hues</strong> (e.g., <span style="color:#1DABE6;">&#9679;</span> and <span
-                        style="color:#1C366A;">&#9679;</span>) indicate older events.</li>
-                <li><strong>Red hues</strong> (e.g., <span style="color:#E43034;">&#9679;</span>, <span
-                        style="color:#FC4E51;">&#9679;</span>, and <span style="color:#AF060F;">&#9679;</span>) denote
-                    more recent events.</li>
+                <li><strong style="color:#1DABE6;">Blue hues</strong> indicate older events.</li>
+                <li><strong style="color:#E43034;">Red hues</strong> denote more recent events.</li>
                 <li>Intermediate colors represent events with dates between the oldest and the most recent.</li>
             </ul>
             <p>
@@ -315,7 +612,7 @@
                 and out and explore data from different regions.
             </p>
             <p>
-                For more information contact with: miguel.carreno[at]upc.edu or alexandre.gracia[at]upc.edu
+                For more information contact: <strong>miguel.carreno[at]upc.edu</strong> or <strong>alexandre.gracia[at]upc.edu</strong>
             </p>
         </div>
     </div>
@@ -323,39 +620,55 @@
     <div id="bottom-bar">
         <div id="oscillation-counter">Oscillations: 0</div>
         <div class="logo-container">
-            <img src="images/LogoCitceaUPC.png" alt="Logo 1">
-            <img src="images/upc-positiu-p3005.png" alt="Logo 2">
+            <img src="images/LogoCitceaUPC.png" alt="CITCEA UPC">
+            <img src="images/upc-positiu-p3005.png" alt="UPC">
         </div>
     </div>
 
     <div id="map"></div>
-    <div id="fullscreen-image" onclick="closeFullscreenImage()">
+
+    <div id="image-viewer" onclick="handleViewerClick(event)">
+        <button class="viewer-close" onclick="closeFullscreenImage()">&times;</button>
         <img id="fullscreen-img" src="" alt="Zoomed Image">
     </div>
 
+    <div id="side-panel" class="side-panel">
+        <div class="side-panel-header">
+            <h2>Oscillation Details</h2>
+            <button class="close-btn" onclick="closeSidePanel()">&times;</button>
+        </div>
+        <div class="side-panel-body" id="side-panel-content">
+        </div>
+    </div>
 
     <script>
         function openSidePanel(content) {
-            document.getElementById("side-panel-content").innerHTML = content;
-            const sidePanel = document.getElementById("side-panel");
-            sidePanel.style.display = "block";
-            sidePanel.classList.add("open");
-
+            const panel = document.getElementById("side-panel");
+            const container = document.getElementById("side-panel-content");
+            const viewer = document.getElementById("image-viewer");
+            container.innerHTML = content;
+            panel.style.display = "flex";
+            requestAnimationFrame(() => {
+                panel.classList.add("open");
+                if (viewer.style.display === 'flex') {
+                    viewer.classList.add('side-panel-open');
+                }
+            });
         }
 
         function closeSidePanel() {
             const panel = document.getElementById("side-panel");
+            const viewer = document.getElementById("image-viewer");
             panel.classList.remove("open");
-            panel.style.display = "none";
+            viewer.classList.remove("side-panel-open");
+            setTimeout(() => { panel.style.display = "none"; }, 300);
         }
-
 
         let debug = false;
         let map = L.map('map', {
             center: [20, 0],
             zoom: 2.5,
             minZoom: 2,
-
         });
         let activeLayers = {};
         let activeCircle = null;
@@ -373,8 +686,14 @@
         });
 
         document.getElementById("info-popup").addEventListener("click", function (event) {
-            if (event.target === this) {
+            if (event.target === this) closePopup();
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") {
                 closePopup();
+                closeSidePanel();
+                closeFullscreenImage();
             }
         });
 
@@ -386,8 +705,9 @@
             downloadExcel();
         })
 
-        function closePopup() {
-            document.getElementById("info-popup").style.display = "none";
+        function wrapField(label, value) {
+            if (!value || value === 'N/A' || value === '') return '';
+            return `<div class="field"><b>${label}:</b> ${value}</div>`;
         }
 
         fetch('oscillation_data.json')
@@ -404,6 +724,7 @@
                     }
                     return new Date(dateString);
                 }
+
                 function getColor(dateStr) {
                     let date = new Date(dateStr);
                     let fraction = (date - minDate) / (maxDate - minDate);
@@ -414,7 +735,6 @@
                 updateOscillationCounter(data.length);
 
                 data.forEach(entry => {
-
                     if (debug) console.log(entry);
                     let coords = entry.coordinates.split(',').map(Number);
 
@@ -422,51 +742,56 @@
                     if (Array.isArray(entry.images) && entry.images.length > 0) {
                         imageHTML = '<div class="popup-image-grid">';
                         entry.images.forEach(img => {
-                            imageHTML += `<img src="${img}" onclick="openFullscreenImage('${img}')" alt="">`;
+                            imageHTML += `<img src="${img}" onclick="openFullscreenImage('${img}')" alt="" loading="lazy">`;
                         });
                         imageHTML += '</div>';
                     }
-                    let sidePanelContent = `<b>Grid:</b> ${entry.grid}<br>
-                          <b>ID:</b> ${entry.id}<br>
-                          <b>Country:</b> ${entry.country}<br>
-                          <b>Region/State:</b> ${entry.Region_state}<br>
-                          <b>First Observation:</b> ${entry.first_observation}<br>
-                          <b>Last Observation:</b> ${entry.last_observation}<br>
-                          <b>Duration:</b> ${entry.duration}<br>
-                          <b>Frequency:</b> ${entry.frequency} Hz<br>
-                          <b>Involved Devices:</b> ${entry.involved_devices}<br>
-                          <b>Propagation:</b> ${entry.propagation}<br>
-                          <b>Distance:</b> ${entry.distance} km<br>
-                          <b>Outages:</b> ${entry.outages}<br>
-                          <b>Identification:</b> ${entry.identification}<br>
-                          <b>Analysis:</b> ${entry.method}<br>
-                          <b>Purported Issue:</b> ${entry.purported}<br>
-                          <b>Mitigation Measures:</b> ${entry.mitigation_measures}<br>
-                          <b>Possible Mechanism:</b> ${entry.possible_mechanism}<br>
-                        ${imageHTML}`;
-                    if (Array.isArray(entry.links) && entry.links.length > 0) {
-                        sidePanelContent += `<b>More info:</b> <br>`;
-                        entry.links.forEach((link) => {
-                            let displayText = link.length > 47 ? link.substring(0, 46) + '...' : link;
-                            sidePanelContent += `<a href="${link}" target="_blank">${displayText}</a> <br>`;
-                        });
 
+                    let sidePanelContent = '';
+                    const fields = [
+                        'Grid', 'ID', 'Country', 'Region/State', 'First Observation', 'Last Observation',
+                        'Duration', 'Frequency', 'Involved Devices', 'Propagation', 'Distance',
+                        'Outages', 'Identification', 'Analysis', 'Purported Issue',
+                        'Mitigation Measures', 'Possible Mechanism'
+                    ];
+                    const keys = [
+                        'grid', 'id', 'country', 'Region_state', 'first_observation', 'last_observation',
+                        'duration', 'frequency', 'involved_devices', 'propagation', 'distance',
+                        'outages', 'identification', 'method', 'purported',
+                        'mitigation_measures', 'possible_mechanism'
+                    ];
 
-                        sidePanelContent += `<br>`;
+                    fields.forEach((label, i) => {
+                        let val = entry[keys[i]];
+                        if (keys[i] === 'frequency' && val) val += ' Hz';
+                        if (keys[i] === 'distance' && val) val += ' km';
+                        sidePanelContent += wrapField(label, val);
+                    });
+
+                    if (imageHTML) {
+                        sidePanelContent += `<div class="field"><b>Images:</b><br>${imageHTML}</div>`;
                     }
 
-
+                    if (Array.isArray(entry.links) && entry.links.length > 0) {
+                        let linksHTML = '<div class="field"><b>More info:</b><br>';
+                        entry.links.forEach((link, idx) => {
+                            let displayText = link.length > 50 ? link.substring(0, 49) + '...' : link;
+                            linksHTML += `<a href="${link}" target="_blank">${idx + 1}. ${displayText}</a><br>`;
+                        });
+                        linksHTML += '</div>';
+                        sidePanelContent += linksHTML;
+                    }
 
                     let markerColor = getColor(entry.last_observation);
 
                     let myIcon = L.divIcon({
                         className: "",
                         html: `<div style="width:25px; height:41px;">
-                               <svg viewBox="0 0 25 41" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; display:block;">
-                                 <path fill="${markerColor}" d="M12.5,0C5.596,0,0,5.596,0,12.5c0,9.176,12.5,28.5,12.5,28.5S25,21.676,25,12.5C25,5.596,19.404,0,12.5,0z"/>
-                                 <circle cx="12.5" cy="12.5" r="5" fill="#fff"/>
-                               </svg>
-                         </div>`,
+                                   <svg viewBox="0 0 25 41" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%; display:block;">
+                                     <path fill="${markerColor}" d="M12.5,0C5.596,0,0,5.596,0,12.5c0,9.176,12.5,28.5,12.5,28.5S25,21.676,25,12.5C25,5.596,19.404,0,12.5,0z"/>
+                                     <circle cx="12.5" cy="12.5" r="5" fill="#fff"/>
+                                   </svg>
+                             </div>`,
                         iconSize: [25, 41],
                         iconAnchor: [12.5, 41]
                     });
@@ -480,9 +805,9 @@
                         openSidePanel(sidePanelContent);
                         map.setView(aux_coords, 8);
                         activeCircle = L.circle(coords, {
-                            color: 'red',
-                            fillColor: '#f1d0d0',
-                            fillOpacity: 0.3,
+                            color: '#e74c3c',
+                            fillColor: 'rgba(231, 76, 60, 0.15)',
+                            fillOpacity: 0.4,
                             radius: radius
                         }).addTo(map);
                         activeLayers[entry.id] = [activeCircle];
@@ -492,25 +817,20 @@
                             .addTo(map);
                         activeLayers[entry.id].push(pointMarkers[entry.id]);
 
-
-
-
                         if (Array.isArray(entry.points) && entry.points.length > 0) {
                             entry.points.forEach(point => {
                                 let pointCoords = point.coordinates.split(',').map(Number);
                                 let subMarker;
                                 if (point.icon_type === 'substation') {
                                     subMarker = L.circleMarker(pointCoords, {
-                                        color: point.guilty ? 'red' : 'gray',
-                                        fillColor: point.guilty ? 'red' : 'gray',
+                                        color: point.guilty ? '#e74c3c' : '#95a5a6',
+                                        fillColor: point.guilty ? '#e74c3c' : '#95a5a6',
                                         fillOpacity: 0.9,
                                         radius: 6
                                     }).addTo(map).bindPopup(`<b>${point.name}</b>`);
                                 } else {
-
                                     let selectedIcon;
                                     switch (point.icon_type) {
-
                                         case 'solar':
                                             selectedIcon = L.icon({
                                                 iconUrl: 'static/icons/solar_energy.png',
@@ -536,12 +856,15 @@
                                             });
                                             break;
                                         default:
-                                            selectedIcon = iconStation;
+                                            selectedIcon = L.icon({
+                                                iconUrl: 'static/icons/electric-factory.png',
+                                                iconSize: [25, 41],
+                                                iconAnchor: [12.5, 41],
+                                                popupAnchor: [0, -41]
+                                            });
                                     }
                                     subMarker = L.marker(pointCoords, { icon: selectedIcon }).addTo(map).bindPopup(`<b>${point.name}</b>`);
-
                                 }
-
 
                                 activeLayers[entry.id].push(subMarker);
                                 pointMarkers[point.name] = subMarker;
@@ -549,7 +872,7 @@
                                 let label = L.marker(pointCoords, {
                                     icon: L.divIcon({
                                         className: 'label',
-                                        html: `<b style="color: ${point.guilty ? 'red' : 'black'};">${point.name}</b>`,
+                                        html: `<b style="color: ${point.guilty ? '#e74c3c' : '#333'};">${point.name}</b>`,
                                         iconSize: [80, 20]
                                     })
                                 }).addTo(map);
@@ -561,13 +884,13 @@
                                 entry.connections.forEach(connection => {
                                     let pointA = connection.from;
                                     let pointB = connection.to;
-                                    let color = connection.color || 'black';
+                                    let color = connection.color || '#666';
 
                                     if (pointMarkers[pointA] && pointMarkers[pointB]) {
                                         let latlngA = pointMarkers[pointA].getLatLng();
                                         let latlngB = pointMarkers[pointB].getLatLng();
 
-                                        let connLine = L.polyline([latlngA, latlngB], { color: color, weight: 2 }).addTo(map);
+                                        let connLine = L.polyline([latlngA, latlngB], { color: color, weight: 2, opacity: 0.7 }).addTo(map);
                                         activeLayers[entry.id].push(connLine);
                                     }
                                 });
@@ -576,9 +899,11 @@
                     });
                 });
             });
+
         function updateOscillationCounter(count) {
             document.getElementById('oscillation-counter').innerText = `Oscillations: ${count}`;
         }
+
         function clearMap() {
             Object.values(activeLayers).forEach(layers => {
                 layers.forEach(layer => map.removeLayer(layer));
@@ -593,12 +918,27 @@
         }
 
         function openFullscreenImage(imageUrl) {
+            const viewer = document.getElementById('image-viewer');
+            const panel = document.getElementById('side-panel');
             document.getElementById('fullscreen-img').src = imageUrl;
-            document.getElementById('fullscreen-image').style.display = 'flex';
+            if (panel.classList.contains('open')) {
+                viewer.classList.add('side-panel-open');
+            } else {
+                viewer.classList.remove('side-panel-open');
+            }
+            viewer.style.display = 'flex';
         }
 
         function closeFullscreenImage() {
-            document.getElementById('fullscreen-image').style.display = 'none';
+            const viewer = document.getElementById('image-viewer');
+            viewer.classList.remove('side-panel-open');
+            viewer.style.display = 'none';
+        }
+
+        function handleViewerClick(event) {
+            if (event.target === event.currentTarget) {
+                closeFullscreenImage();
+            }
         }
 
         function downloadExcel() {
@@ -650,15 +990,6 @@
             closeSidePanel();
         });
     </script>
-    <div id="side-panel" class="side-panel">
-        <div class="side-panel-header">
-            <h2>Oscillation Details</h2>
-            <span class="close-btn" onclick="closeSidePanel()">×</span>
-        </div>
-        <div class="side-panel-body" id="side-panel-content">
-        </div>
-
-    </div>
 </body>
 
 </html>
