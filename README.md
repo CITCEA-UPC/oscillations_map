@@ -1,6 +1,6 @@
 # CITCEA Oscillation Database
 
-Interactive map visualization of oscillation data from the Spanish electrical grid.
+Interactive map visualization of oscillation data from the World electrical grid.
 
 ## Deployment
 
