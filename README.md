@@ -11,8 +11,6 @@ The application is deployed via GitHub Pages and accessible at:
 ## Repository Structure
 
 - `docs/` - Static site deployed to GitHub Pages (index.html, oscillation data, assets)
-- `src/` - Legacy Flask application (deprecated)
-- `legacy/` - Previous versions of the project
 - `resources/` - Additional resources and documentation
 
 ## Data
