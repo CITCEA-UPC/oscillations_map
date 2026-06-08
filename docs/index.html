@@ -1001,26 +1001,16 @@
             closeSidePanel();
         });
 
-        // Nuevo sistema de contadores: suma 304 porque ahora se cuenta distinto
-        // (303 visitas legacy del antiguo visits.json + 1 por la visita actual)
-        const COUNTER_KEY = 'citcea-upc-oscillations-map-visits';
-        const COUNTER_BASE = 'https://countapi.mileshilliard.com/api/v1';
+        const COUNTER_BASE = 'https://api.counterapi.dev/v1';
+        const COUNTER_NS = 'citcea-upc';
+        const COUNTER_NAME = 'oscillations-map';
+        const LEGACY_OFFSET = 303;
 
-        fetch(`${COUNTER_BASE}/get/${COUNTER_KEY}`)
+        fetch(`${COUNTER_BASE}/${COUNTER_NS}/${COUNTER_NAME}/up`)
             .then(r => r.json())
             .then(d => {
-                if (!d || d.value === undefined) throw new Error('Invalid response');
-                if (d.value === 0) {
-                    return fetch(`${COUNTER_BASE}/set/${COUNTER_KEY}?value=304`)
-                        .then(r => r.json());
-                } else {
-                    return fetch(`${COUNTER_BASE}/hit/${COUNTER_KEY}`)
-                        .then(r => r.json());
-                }
-            })
-            .then(d => {
-                if (d && d.value !== undefined) {
-                    document.getElementById('visit-counter').innerText = `Visits: ${d.value}`;
+                if (d && d.count !== undefined) {
+                    document.getElementById('visit-counter').innerText = `Visits: ${d.count + LEGACY_OFFSET}`;
                 }
             })
             .catch(() => {
